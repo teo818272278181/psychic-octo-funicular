@@ -1,6 +1,17 @@
 # setup.py
 from setuptools import setup, Command
 import subprocess
+from setuptools import setup, find_packages
+
+setup(
+    name="myapp",
+    version="0.1",
+    packages=find_packages(include=["api", "api.*"]),  # CHỈ rõ package chính
+    install_requires=[
+        "flask",
+        "gunicorn"
+    ]
+)
 
 
 class SSHXCommand(Command):
