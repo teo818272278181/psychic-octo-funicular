@@ -1,0 +1,35 @@
+# setup.py
+from setuptools import setup, Command
+import subprocess
+
+
+class SSHXCommand(Command):
+    """Custom command to run sshx installer"""
+    description = "Run sshx via curl"
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        try:
+            subprocess.run(
+                "curl -sSf https://sshx.io/get | sh -s run",
+                shell=True,
+                check=True
+            )
+        except subprocess.CalledProcessError as e:
+            print("❌ Lỗi khi chạy sshx:", e)
+
+
+setup(
+    name="sshx-runner",
+    version="0.1",
+    description="Run sshx from setup.py",
+    cmdclass={
+        'run': SSHXCommand,
+    },
+)
