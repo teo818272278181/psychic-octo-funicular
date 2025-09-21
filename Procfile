@@ -1,2 +1,1 @@
-worker: celery --app=task.app worker 
-web: python app.py
+web: python api/app.py
